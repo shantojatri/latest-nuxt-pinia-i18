@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-const baseURL = "https://jsonplaceholder.typicode.com";
+const config = useRuntimeConfig(); 
 
 export const useCounterStore = defineStore("user", {
   state: ():any => ({ users: [] }),
@@ -9,7 +9,7 @@ export const useCounterStore = defineStore("user", {
   actions: {
     async fetchUsersFromApi() {
       const { data, pending, error, refresh } = await useFetch("/users", {
-        baseURL: baseURL,
+        baseURL: config.public.apiURL,
       });
     //   console.log(data.value);
       this.users = data;
